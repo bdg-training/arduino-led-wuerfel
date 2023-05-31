@@ -319,3 +319,229 @@ const int LED_L_1x4 = 316;
 const int LED_L_1x3 = 317;
 const int LED_L_1x2 = 318;
 const int LED_L_1x1 = 319;
+
+
+int inFlaeche(int nummer, int offset, int reiheStart, int reiheEnde, int ledLinks, int ledRechts) {
+
+  // Reihe 1 ?
+  if (nummer > reiheStart || nummer < reiheEnde) {
+    //Serial.println("-2");
+    return -2;
+  }
+
+  int neueNummer = nummer - offset;
+
+  // Reihe 1 ?
+  if (neueNummer > reiheStart || neueNummer < reiheEnde) {
+    //Serial.println("-2");
+    return -2;
+  }
+  
+  // mit Offset noch in Reihe 1 ?
+  if (neueNummer <= reiheStart && neueNummer >= reiheEnde) {
+    //Serial.println(neueNummer);
+    return neueNummer;
+  }
+
+  // nicht in Reihe
+  //Serial.println("-1");
+  return -1;
+}
+
+
+int flaecheVorne(int nummer, int offset) {
+
+  int neueNummer = inFlaeche(nummer, offset, LED_V_1x1, LED_V_1x8, LED_L_1x8, LED_R_1x1);
+  if (neueNummer > -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_V_2x1, LED_V_2x8, LED_L_2x8, LED_R_2x1);
+  if (neueNummer > -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_V_3x1, LED_V_3x8, LED_L_3x8, LED_R_3x1);
+  if (neueNummer > -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_V_4x1, LED_V_4x8, LED_L_4x8, LED_R_4x1);
+  if (neueNummer > -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_V_5x1, LED_V_5x8, LED_L_5x8, LED_R_5x1);
+  if (neueNummer > -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_V_6x1, LED_V_6x8, LED_L_6x8, LED_R_6x1);
+  if (neueNummer > -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_V_7x1, LED_V_7x8, LED_L_7x8, LED_R_7x1);
+  if (neueNummer > -1) {
+    return neueNummer;
+  }
+
+  return inFlaeche(nummer, offset, LED_V_8x1, LED_V_8x8, LED_L_8x8, LED_R_8x1);
+}
+
+
+int flaecheRechts(int nummer, int offset) {
+
+  int neueNummer = inFlaeche(nummer, offset, LED_R_1x1, LED_R_1x8, LED_V_1x8, LED_H_1x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_R_2x1, LED_R_2x8, LED_V_2x8, LED_H_2x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_R_3x1, LED_R_3x8, LED_V_3x8, LED_H_3x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_R_4x1, LED_R_4x8, LED_V_4x8, LED_H_4x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_R_5x1, LED_R_5x8, LED_V_5x8, LED_H_5x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_R_6x1, LED_R_6x8, LED_V_6x8, LED_H_6x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_R_7x1, LED_R_7x8, LED_V_7x8, LED_H_7x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  return inFlaeche(nummer, offset, LED_R_8x1, LED_R_8x8, LED_V_8x8, LED_H_8x1);
+}
+
+
+int flaecheHinten(int nummer, int offset) {
+
+  int neueNummer = inFlaeche(nummer, offset, LED_H_1x1, LED_H_1x8, LED_R_1x8, LED_L_1x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_H_2x1, LED_H_2x8, LED_R_2x8, LED_L_2x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_H_3x1, LED_H_3x8, LED_R_3x8, LED_L_3x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_H_4x1, LED_H_4x8, LED_R_4x8, LED_L_4x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_H_5x1, LED_H_5x8, LED_R_5x8, LED_L_5x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_H_6x1, LED_H_6x8, LED_R_6x8, LED_L_6x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_H_7x1, LED_H_7x8, LED_R_7x8, LED_L_7x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  return inFlaeche(nummer, offset, LED_H_8x1, LED_H_8x8, LED_R_8x8, LED_L_8x1);
+}
+
+int flaecheLinks(int nummer, int offset) {
+
+  int neueNummer = inFlaeche(nummer, offset, LED_L_1x1, LED_L_1x8, LED_V_1x8, LED_H_1x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_L_2x1, LED_L_2x8, LED_V_2x8, LED_H_2x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_L_3x1, LED_L_3x8, LED_V_3x8, LED_H_3x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_L_4x1, LED_L_4x8, LED_V_4x8, LED_H_4x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_L_5x1, LED_L_5x8, LED_V_5x8, LED_H_5x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_L_6x1, LED_L_6x8, LED_V_6x8, LED_H_6x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  neueNummer = inFlaeche(nummer, offset, LED_L_7x1, LED_L_7x8, LED_V_7x8, LED_H_7x1);
+  if (neueNummer != -1) {
+    return neueNummer;
+  }
+
+  return inFlaeche(nummer, offset, LED_L_8x1, LED_L_8x8, LED_V_8x8, LED_H_8x1);
+}
+
+
+void ledOffsetX(int nummer, int offset, uint32_t color, Adafruit_NeoPixel & pixels) {
+
+  int neueNummer = flaecheVorne(nummer, offset);
+  if (neueNummer == -2) {
+    return;
+  } else if (neueNummer != -1) {
+    pixels.setPixelColor(neueNummer, color);
+    return;
+  }
+
+
+  /*neueNummer = flaecheRechts(nummer, offset);
+    if (neueNummer != -1) {
+    pixels.setPixelColor(neueNummer, color);
+    return;
+    } else if (neueNummer == -2) {
+    return;
+    }
+
+    neueNummer = flaecheHinten(nummer, offset);
+    if (neueNummer != -1) {
+    pixels.setPixelColor(neueNummer, color);
+    return;
+    } else if (neueNummer == -2) {
+    return;
+    }
+
+    neueNummer = flaecheLinks(nummer, offset);
+    if (neueNummer != -1) {
+    pixels.setPixelColor(neueNummer, color);
+    return;
+    }*/
+}
