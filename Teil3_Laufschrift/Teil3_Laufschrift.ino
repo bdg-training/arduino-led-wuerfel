@@ -10,7 +10,7 @@
 
 Adafruit_NeoPixel pixels(NUMPIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
 
-int laufschriftPos = 6;
+int laufschriftPos = 0;
 byte wheelPos = 0;
 
 unsigned long startZeitPos = 0;
@@ -29,17 +29,20 @@ void setup() {
 
 void loop() {
 
+  // Position aendern?
   if (millis() > startZeitPos + 200) {
 
     laufschriftPos--;
 
-    if (laufschriftPos < -13) {
-      laufschriftPos = 6;
+    // 8 LEDs * 4 Flaechen
+    if (laufschriftPos < -31) {
+      laufschriftPos = 0;
     }
 
     startZeitPos = millis();
   }
 
+  // Farbe aendern?
   if (millis() > startZeitColor + 50) {
 
     // LEDs beschreiben
