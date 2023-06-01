@@ -3,6 +3,7 @@
 
 #include <Adafruit_NeoPixel.h>
 #include "LED.h"
+#include "Zeichen.h"
 
 #define LED_PIN     3
 #define NUMPIXELS   320
@@ -48,12 +49,12 @@ void loop() {
     // LEDs beschreiben
     pixels.clear();
 
-    uint32_t color = wheel(wheelPos);
-    // gruen
-    //color = pixels.Color(0, 255, 0);
+    // blau
+    uint32_t color = pixels.Color(0, 0, 255);
 
-    zeichenV(color, laufschriftPos);
-    zeichenL(color, laufschriftPos + 7);
+    zeichenB(color, laufschriftPos, pixels);
+    zeichenD(color, laufschriftPos + 8, pixels);
+    zeichenG(color, laufschriftPos + 15, pixels);
 
     pixels.show();
 
@@ -67,61 +68,6 @@ void loop() {
     startZeitColor = millis();
   }
 }
-
-void zeichenV(uint32_t color, int offset) {
-
-  ledOffsetX(LED_V_2x1, offset, color, pixels);
-  ledOffsetX(LED_V_2x2, offset, color, pixels);
-  ledOffsetX(LED_V_2x5, offset, color, pixels);
-  ledOffsetX(LED_V_2x6, offset, color, pixels);
-
-  ledOffsetX(LED_V_3x1, offset, color, pixels);
-  ledOffsetX(LED_V_3x2, offset, color, pixels);
-  ledOffsetX(LED_V_3x5, offset, color, pixels);
-  ledOffsetX(LED_V_3x6, offset, color, pixels);
-
-  ledOffsetX(LED_V_4x1, offset, color, pixels);
-  ledOffsetX(LED_V_4x2, offset, color, pixels);
-  ledOffsetX(LED_V_4x5, offset, color, pixels);
-  ledOffsetX(LED_V_4x6, offset, color, pixels);
-
-  ledOffsetX(LED_V_5x1, offset, color, pixels);
-  ledOffsetX(LED_V_5x2, offset, color, pixels);
-  ledOffsetX(LED_V_5x5, offset, color, pixels);
-  ledOffsetX(LED_V_5x6, offset, color, pixels);
-
-  ledOffsetX(LED_V_6x2, offset, color, pixels);
-  ledOffsetX(LED_V_6x3, offset, color, pixels);
-  ledOffsetX(LED_V_6x4, offset, color, pixels);
-  ledOffsetX(LED_V_6x5, offset, color, pixels);
-
-  ledOffsetX(LED_V_7x3, offset, color, pixels);
-  ledOffsetX(LED_V_7x4, offset, color, pixels);
-}
-
-void zeichenL(uint32_t color, int offset) {
-
-  ledOffsetX(LED_V_2x2, offset, color, pixels);
-  ledOffsetX(LED_V_3x2, offset, color, pixels);
-  ledOffsetX(LED_V_4x2, offset, color, pixels);
-  ledOffsetX(LED_V_5x2, offset, color, pixels);
-  ledOffsetX(LED_V_6x2, offset, color, pixels);
-  ledOffsetX(LED_V_7x2, offset, color, pixels);
-
-  ledOffsetX(LED_V_2x3, offset, color, pixels);
-  ledOffsetX(LED_V_3x3, offset, color, pixels);
-  ledOffsetX(LED_V_4x3, offset, color, pixels);
-  ledOffsetX(LED_V_5x3, offset, color, pixels);
-  ledOffsetX(LED_V_6x3, offset, color, pixels);
-  ledOffsetX(LED_V_7x3, offset, color, pixels);
-
-  ledOffsetX(LED_V_6x4, offset, color, pixels);
-  ledOffsetX(LED_V_7x4, offset, color, pixels);
-
-  ledOffsetX(LED_V_6x5, offset, color, pixels);
-  ledOffsetX(LED_V_7x5, offset, color, pixels);
-}
-
 
 // Input a value 0 to 255 to get a color value.
 // The colours are a transition r - g - b - back to r.
