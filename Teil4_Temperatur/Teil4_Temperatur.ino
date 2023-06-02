@@ -15,11 +15,6 @@
 Adafruit_NeoPixel pixels(NUMPIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
 Adafruit_MCP9808 tempsensor = Adafruit_MCP9808();
 
-byte wheelPos = 0;
-
-float temperatur;
-
-unsigned long startZeitColor = 0;
 unsigned long startZeitTemperatur = 0;
 
 void setup() {
@@ -46,18 +41,11 @@ void loop() {
   if (millis() > startZeitTemperatur + 1000) {
 
     tempsensor.wake();
-    temperatur = tempsensor.readTempC();
+    float temperatur = tempsensor.readTempC();
     Serial.print("Temp: ");
     Serial.print(temperatur, 4);
     Serial.println("*C");
     tempsensor.shutdown_wake(1);
-
-    startZeitTemperatur = millis();
-  }
-
-
-  // Farbe aendern?
-  if (millis() > startZeitColor + 100) {
 
     // LEDs beschreiben
     pixels.clear();
@@ -66,14 +54,7 @@ void loop() {
 
     pixels.show();
 
-    // neue Position in Farbrad
-    wheelPos += 1;
-
-    if (wheelPos == 255) {
-      wheelPos = 0;
-    }
-
-    startZeitColor = millis();
+    startZeitTemperatur = millis();
   }
 }
 
@@ -91,15 +72,15 @@ void schreibeTemp(float c) {
     color = pixels.Color(0, 0, 255);
   }
 
-  if (temp >= 19 && temp < 25 ) {
+  if (temp >= 19 && temp <= 25) {
     color = pixels.Color(0, 255, 0);
   }
 
-  if (temp >= 26 && temp < 30 ) {
+  if (temp >= 26 && temp <= 29) {
     color = pixels.Color(200, 100, 0);
   }
 
-  if (temp >= 30 ) {
+  if (temp >= 30) {
     color = pixels.Color(255, 0, 0);
   }
 
@@ -160,19 +141,4 @@ void schreibeZahl(int dec, int offset, uint32_t color) {
       zahl9k(color, offset, pixels);
       break;
   }
-}
-
-// Input a value 0 to 255 to get a color value.
-// The colours are a transition r - g - b - back to r.
-uint32_t wheel(byte WheelPos) {
-  WheelPos = 255 - WheelPos;
-  if (WheelPos < 85) {
-    return pixels.Color(255 - WheelPos * 3, 0, WheelPos * 3);
-  }
-  if (WheelPos < 170) {
-    WheelPos -= 85;
-    return pixels.Color(0, WheelPos * 3, 255 - WheelPos * 3);
-  }
-  WheelPos -= 170;
-  return pixels.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
 }
