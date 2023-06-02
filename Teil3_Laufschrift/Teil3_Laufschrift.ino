@@ -3,6 +3,7 @@
 
 #include <Adafruit_NeoPixel.h>
 #include "LED.h"
+#include "Zahlen.h"
 #include "Zeichen.h"
 
 #define LED_PIN     3
