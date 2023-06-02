@@ -43,7 +43,7 @@ void setup() {
 void loop() {
 
   // Temperatur lesen?
-  if (millis() > startZeitTemperatur + 500) {
+  if (millis() > startZeitTemperatur + 1000) {
 
     tempsensor.wake();
     temperatur = tempsensor.readTempC();
@@ -62,11 +62,7 @@ void loop() {
     // LEDs beschreiben
     pixels.clear();
 
-    uint32_t color = wheel(wheelPos);
-    // gruen
-    //color = pixels.Color(0, 255, 0);
-
-    schreibeTemp(temperatur, color);
+    schreibeTemp(temperatur);
 
     pixels.show();
 
@@ -81,12 +77,32 @@ void loop() {
   }
 }
 
-void schreibeTemp(float c, uint32_t color) {
+void schreibeTemp(float c) {
 
   int temp = round(c);
 
-  // test
-  temp = 1;
+  //test
+  //temp = 17;
+
+  uint32_t color = pixels.Color(255, 255, 255);
+
+  // je nach Temperaturbereich, Zahlen einfaerben
+  if (temp <= 18) {
+    color = pixels.Color(0, 0, 255);
+  }
+
+  if (temp >= 19 && temp < 25 ) {
+    color = pixels.Color(0, 255, 0);
+  }
+
+  if (temp >= 26 && temp < 30 ) {
+    color = pixels.Color(200, 100, 0);
+  }
+
+  if (temp >= 30 ) {
+    color = pixels.Color(255, 0, 0);
+  }
+
 
   String s = "";
   if (temp < 10) {
@@ -110,6 +126,38 @@ void schreibeZahl(int dec, int offset, uint32_t color) {
 
     case 1:
       zahl1k(color, offset, pixels);
+      break;
+
+    case 2:
+      zahl2k(color, offset, pixels);
+      break;
+
+    case 3:
+      zahl3k(color, offset, pixels);
+      break;
+
+    case 4:
+      zahl4k(color, offset, pixels);
+      break;
+
+    case 5:
+      zahl5k(color, offset, pixels);
+      break;
+
+    case 6:
+      zahl6k(color, offset, pixels);
+      break;
+
+    case 7:
+      zahl7k(color, offset, pixels);
+      break;
+
+    case 8:
+      zahl8k(color, offset, pixels);
+      break;
+
+    case 9:
+      zahl9k(color, offset, pixels);
       break;
   }
 }
